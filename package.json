@@ -1,0 +1,18 @@
+{
+  "name": "portifolio",
+  "version": "1.0.0",
+  "description": "Meu portifólio",
+  "main": "main.js",
+  "author": "Kevin Ramos",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn parcel src/index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  },
+  "dependencies": {
+    "gsap": "./gsap-bonus.tgz",
+    "three": "^0.142.0"
+  }
+}

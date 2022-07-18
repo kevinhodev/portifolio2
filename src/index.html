@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Kevin Ramos | Programador & Designer</title>
+  </head>
+  <body>
+    <canvas class="three"></canvas>
+    <div class="container">
+      <div class="sidebar">
+        <h1 class="sidebar__logo text-gradient">Kevin Ramos</h1>
+        <div class="sidebar__menu">
+          <ul>
+            <li>
+              <a href="/home">Início</a>
+            </li>
+            <li>
+              <a href="/about">Sobre</a>
+            </li>
+            <li>
+              <a href="/projects">Projetos</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar__icons">
+          <img src="./assets/twitter.svg" alt="twitter" class="sidebar__icon" />
+          <img src="./assets/behance.svg" alt="behance" class="sidebar__icon" />
+          <img src="./assets/github.svg" alt="github" class="sidebar__icon" />
+        </div>
+      </div>
+      <div class="app__profile">
+        <img
+          class="profile-image canvas-front"
+          src="./assets/profile.svg"
+          alt="profile"
+        />
+        <h1 class="profile-description canvas-front">
+          Olá, sou <span class="text-gradient">Kevin Ramos</span>, profissional
+          de <span class="text-gradient">programação e designer</span>, gosto de
+          fazer interfaces
+          <span class="text-gradient">dinânimas e bonitas</span> e aplicações
+          <span class="text-gradient">rápidas</span>.
+        </h1>
+      </div>
+      <img class="app__arrow" src="./assets/arrow.svg" alt="arrow" />
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
