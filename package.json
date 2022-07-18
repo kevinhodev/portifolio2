@@ -5,8 +5,10 @@
   "main": "main.js",
   "author": "Kevin Ramos",
   "license": "MIT",
+  "source": "src/index.html",
   "scripts": {
-    "start": "yarn parcel src/index.html"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "devDependencies": {
     "parcel": "^2.6.2"
