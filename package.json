@@ -12,7 +12,7 @@
     "parcel": "^2.6.2"
   },
   "dependencies": {
-    "gsap": "./gsap-bonus.tgz",
+    "gsap": "^3.10.4",
     "three": "^0.142.0"
   }
 }

@@ -1028,9 +1028,10 @@ globals@^13.2.0:
   dependencies:
     type-fest "^0.20.2"
 
-gsap@./gsap-bonus.tgz:
+gsap@^3.10.4:
   version "3.10.4"
-  resolved "./gsap-bonus.tgz#fd2db993b84d433c911f0780c6ec48dae34a0a8a"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.10.4.tgz#db89a6b8f6d5cb76e274eae822cbc1aa4d31e88f"
+  integrity sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==
 
 has-flag@^3.0.0:
   version "3.0.0"
