@@ -2,7 +2,6 @@
   "name": "portifolio",
   "version": "1.0.0",
   "description": "Meu portifólio",
-  "main": "main.js",
   "author": "Kevin Ramos",
   "license": "MIT",
   "source": "src/index.html",
