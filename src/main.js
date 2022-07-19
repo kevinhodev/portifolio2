@@ -44,16 +44,37 @@ timeline.from(
   "-=1"
 );
 
+const scrollTimeline = gsap.timeline({ repeat: -1, duration: 0.5 });
+
 //-- Arrow --//
-gsap.to(".app__arrow", {
-  duration: 1,
-  transform: "translateX(2rem)",
-  repeat: -1,
-  yoyo: true,
-  ease: "Sine.easeInOut",
+scrollTimeline.to(".scroll__arrow:nth-child(1)", {
+  opacity: 1,
+});
+scrollTimeline.to(".scroll__arrow:nth-child(1)", {
+  opacity: 0,
+});
+scrollTimeline.to(
+  ".scroll__arrow:nth-child(2)",
+  {
+    opacity: 1,
+  },
+  "-=0.4"
+);
+scrollTimeline.to(".scroll__arrow:nth-child(2)", {
+  opacity: 0,
+});
+scrollTimeline.to(
+  ".scroll__arrow:nth-child(3)",
+  {
+    opacity: 1,
+  },
+  "-=0.4"
+);
+scrollTimeline.to(".scroll__arrow:nth-child(3)", {
+  opacity: 0,
 });
 
-const canvas = document.querySelector(".three");
+const canvas = document.querySelector(".canvas");
 
 let scrollY = window.scrollY;
 const objectsDistance = 4;

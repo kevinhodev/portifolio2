@@ -8,7 +8,7 @@
     <title>Kevin Ramos | Programador & Designer</title>
   </head>
   <body>
-    <canvas class="three"></canvas>
+    <canvas class="canvas"></canvas>
     <div class="container">
       <header class="header">
         <h1 class="header__logo text-gradient"><a href="#">KR</a></h1>
@@ -31,21 +31,54 @@
           <img src="./assets/github.svg" alt="github" class="header__icon" />
         </div>
       </header>
-      <section class="intro">
-        <img
-          class="profile-image canvas-front"
-          src="./assets/profile.svg"
-          alt="profile"
-        />
-        <h1 class="profile-description canvas-front">
-          Olá, sou <span class="text-gradient">Kevin Ramos</span>, profissional
-          de <span class="text-gradient">programação e designer</span>, gosto de
-          fazer interfaces
-          <span class="text-gradient">dinânimas e bonitas</span> e aplicações
-          <span class="text-gradient">rápidas</span>.
-        </h1>
-        <img class="app__arrow" src="./assets/arrow.svg" alt="arrow" />
-      </section>
+      <main class="main">
+        <section class="intro">
+          <img class="profile-image" src="./assets/profile.svg" alt="profile" />
+          <h1 class="profile-description">
+            Olá, sou <span class="text-gradient">Kevin Ramos</span>,
+            profissional de
+            <span class="text-gradient">programação e designer</span>, gosto de
+            fazer interfaces
+            <span class="text-gradient">dinânimas e bonitas</span> e aplicações
+            <span class="text-gradient">rápidas</span>.
+          </h1>
+        </section>
+        <div class="scroll">
+          <svg
+            class="scroll__arrow"
+            width="40"
+            height="40"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M80.0931 500C64.253 499.998 48.7696 497.2 35.6001 491.96C22.4306 486.72 12.1664 479.273 6.10507 470.561C0.043788 461.849 -1.54241 452.262 1.54691 443.014C4.63623 433.765 12.2624 425.269 23.4614 418.6L306.627 249.997L23.4589 81.3967C8.43849 72.4548 7.51102e-05 60.327 5.01284e-10 47.6812C-7.51092e-05 35.0354 8.43822 22.9075 23.4585 13.9656C38.4789 5.0236 58.8508 4.47146e-05 80.0928 2.98509e-10C101.335 -4.4714e-05 121.707 5.02344 136.727 13.9653L476.532 216.283C483.972 220.71 489.874 225.966 493.901 231.751C497.927 237.536 500 243.737 500 249.999C500 256.261 497.927 262.461 493.901 268.246C489.874 274.032 483.972 279.288 476.532 283.714L136.727 486.031C129.299 490.466 120.471 493.983 110.752 496.38C101.033 498.777 90.6135 500.008 80.0931 500Z"
+            />
+          </svg>
+          <svg
+            class="scroll__arrow"
+            width="40"
+            height="40"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M80.0931 500C64.253 499.998 48.7696 497.2 35.6001 491.96C22.4306 486.72 12.1664 479.273 6.10507 470.561C0.043788 461.849 -1.54241 452.262 1.54691 443.014C4.63623 433.765 12.2624 425.269 23.4614 418.6L306.627 249.997L23.4589 81.3967C8.43849 72.4548 7.51102e-05 60.327 5.01284e-10 47.6812C-7.51092e-05 35.0354 8.43822 22.9075 23.4585 13.9656C38.4789 5.0236 58.8508 4.47146e-05 80.0928 2.98509e-10C101.335 -4.4714e-05 121.707 5.02344 136.727 13.9653L476.532 216.283C483.972 220.71 489.874 225.966 493.901 231.751C497.927 237.536 500 243.737 500 249.999C500 256.261 497.927 262.461 493.901 268.246C489.874 274.032 483.972 279.288 476.532 283.714L136.727 486.031C129.299 490.466 120.471 493.983 110.752 496.38C101.033 498.777 90.6135 500.008 80.0931 500Z"
+            />
+          </svg>
+          <svg
+            class="scroll__arrow"
+            width="40"
+            height="40"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M80.0931 500C64.253 499.998 48.7696 497.2 35.6001 491.96C22.4306 486.72 12.1664 479.273 6.10507 470.561C0.043788 461.849 -1.54241 452.262 1.54691 443.014C4.63623 433.765 12.2624 425.269 23.4614 418.6L306.627 249.997L23.4589 81.3967C8.43849 72.4548 7.51102e-05 60.327 5.01284e-10 47.6812C-7.51092e-05 35.0354 8.43822 22.9075 23.4585 13.9656C38.4789 5.0236 58.8508 4.47146e-05 80.0928 2.98509e-10C101.335 -4.4714e-05 121.707 5.02344 136.727 13.9653L476.532 216.283C483.972 220.71 489.874 225.966 493.901 231.751C497.927 237.536 500 243.737 500 249.999C500 256.261 497.927 262.461 493.901 268.246C489.874 274.032 483.972 279.288 476.532 283.714L136.727 486.031C129.299 490.466 120.471 493.983 110.752 496.38C101.033 498.777 90.6135 500.008 80.0931 500Z"
+            />
+          </svg>
+        </div>
+      </main>
     </div>
 
     <script type="module" src="main.js"></script>
