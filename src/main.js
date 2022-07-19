@@ -56,32 +56,38 @@ introTimeline.to(".text-animated", {
   delay: 1,
 });
 
-const arrowTimeline = gsap.timeline({ repeat: -1, duration: 0.5 });
+const arrowTimeline = gsap.timeline({ repeat: -1 });
 arrowTimeline.to(".scroll__arrow:nth-child(1)", {
   opacity: 0.9,
+  duration: 0.5,
 });
 arrowTimeline.to(".scroll__arrow:nth-child(1)", {
   opacity: 0,
+  duration: 0.5,
 });
 arrowTimeline.to(
   ".scroll__arrow:nth-child(2)",
   {
     opacity: 0.9,
+    duration: 0.5,
   },
   "-=0.4"
 );
 arrowTimeline.to(".scroll__arrow:nth-child(2)", {
   opacity: 0,
+  duration: 0.5,
 });
 arrowTimeline.to(
   ".scroll__arrow:nth-child(3)",
   {
     opacity: 0.9,
+    duration: 0.5,
   },
   "-=0.4"
 );
 arrowTimeline.to(".scroll__arrow:nth-child(3)", {
   opacity: 0,
+  duration: 0.25,
 });
 
 /**
