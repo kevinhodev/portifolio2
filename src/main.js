@@ -6,14 +6,15 @@ const timeline = gsap.timeline();
 
 /* Animations */
 
-//-- Sidebar --//
-timeline.from(".sidebar__logo", {
+//-- Header --//
+timeline.from(".header__logo", {
   duration: 1,
   opacity: 0,
-  transform: "translateX(-10rem) rotate(-90deg)",
+  transform: "translateX(-10rem)",
 });
+
 timeline.from(
-  ".sidebar__menu ul li",
+  ".header__menu ul li",
   {
     duration: 1,
     opacity: 0,
@@ -23,10 +24,11 @@ timeline.from(
   "-=1"
 );
 timeline.from(
-  ".sidebar__icon",
+  ".header__icon",
   {
     duration: 1,
     opacity: 0,
+    transform: "translateX(-10rem)",
     stagger: 0.2,
   },
   "-=1"
@@ -39,7 +41,7 @@ timeline.from(
     duration: 1,
     transform: "scale(0)",
   },
-  "-=2"
+  "-=1"
 );
 
 //-- Arrow --//

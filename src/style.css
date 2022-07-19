@@ -79,68 +79,79 @@ small,
   padding: 0 6rem;
 }
 
-.sidebar {
+.header {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  bottom: 0;
   width: 12rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
-.sidebar__logo {
-  font-family: "Rubik Moonrocks", cursive;
-  font-size: 4rem;
+.header__logo {
+  position: fixed;
+  top: 4.8rem;
   height: max-content;
   width: max-content;
 }
 
-.sidebar__menu {
-  transform: rotate(-90deg) translateX(-3.2rem);
+.header__logo a {
+  position: relative;
+  display: inline-block;
+  font-family: "Rubik Moonrocks", cursive;
+  font-size: 4rem;
+  text-decoration: none;
+  letter-spacing: 0.4rem;
+  padding: 0.4rem;
 }
 
-.sidebar__menu ul {
+.header__menu {
+  position: fixed;
+  top: 50%;
+  transform: rotate(-90deg) translateX(25%);
+}
+
+.header__menu ul {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  gap: 1rem;
+  gap: 1.6rem;
   list-style-type: none;
 }
 
-.sidebar__menu ul li {
+.header__menu ul li {
   padding: 0 1rem;
 }
 
-.sidebar__menu ul li a {
-  font-size: 1.2rem;
-  font-weight: 600;
+.header__menu ul li a {
+  font-size: 1.4rem;
+  font-weight: 800;
   text-transform: uppercase;
   text-decoration: none;
   color: #ffffff;
 }
 
-.sidebar__icons {
+.header__icons {
+  position: fixed;
+  bottom: 4.8rem;
   display: flex;
   flex-direction: column;
+  gap: 2.4rem;
   align-items: center;
-  gap: 2.5rem;
   width: max-content;
-  transform: translateY(3.2rem);
 }
 
-.sidebar__icon {
+.header__icon {
   cursor: pointer;
-  height: 4rem;
-  width: 4rem;
-  padding: 0.5rem;
-  border-radius: 40%;
+  height: 2.4rem;
+  width: 2.4rem;
 }
 
-.app__profile {
+.intro {
   height: 100%;
   width: 100%;
   display: grid;
