@@ -105,16 +105,18 @@ small,
   text-decoration: none;
   letter-spacing: 0.4rem;
   padding: 0.4rem;
+  color: #8fbfff;
 }
 
 .header__menu {
-  position: fixed;
+  position: absolute;
   top: 50%;
   transform: rotate(-90deg) translateX(25%);
 }
 
 .header__menu ul {
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -132,6 +134,7 @@ small,
   text-transform: uppercase;
   text-decoration: none;
   color: #ffffff;
+  opacity: 0.85;
 }
 
 .header__icons {
@@ -148,6 +151,7 @@ small,
   cursor: pointer;
   height: 2.4rem;
   width: 2.4rem;
+  fill: #fff;
 }
 
 .main {
@@ -156,20 +160,40 @@ small,
 }
 
 section {
-  padding: 0 8rem;
+  padding-left: 13.6rem;
+  padding-right: 12rem;
 }
 
 .intro {
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-.profile-description {
-  font-size: 4.8rem;
+.intro__text {
+  max-width: 960px;
+  width: 100%;
+  margin-top: 24rem;
+}
+
+.intro__title {
+  font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: 0.4rem;
   color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 2.4rem;
+}
+
+.intro__subtitle {
+  font-size: 10rem;
+  font-weight: 800;
+  line-height: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 .scroll__arrow {
@@ -177,7 +201,7 @@ section {
   bottom: 4.8rem;
   transform: translateX(-50%);
   width: 2.4rem;
-  fill: #5648fa;
+  fill: #fff;
   opacity: 0;
 }
 
@@ -195,7 +219,12 @@ section {
 
 /* Utilities */
 .text-gradient {
-  background-image: linear-gradient(45deg, #ffffff 0%, #5648fa 50%);
+  background-image: linear-gradient(
+    45deg,
+    #ffffff 0%,
+    #5648fa 75%,
+    #ffffff 100%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

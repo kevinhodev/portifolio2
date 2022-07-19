@@ -1,6 +1,9 @@
 import * as THREE from "three";
 import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 import EarthTexture from "./assets/textures/earth.jpg";
+
+gsap.registerPlugin(TextPlugin);
 
 const timeline = gsap.timeline();
 
@@ -34,46 +37,57 @@ timeline.from(
   "-=1"
 );
 
-//-- Profile --//
-timeline.from(
-  ".profile-image",
-  {
-    duration: 1,
-    transform: "scale(0)",
-  },
-  "-=1"
-);
-
-const scrollTimeline = gsap.timeline({ repeat: -1, duration: 0.5 });
-
-//-- Arrow --//
-scrollTimeline.to(".scroll__arrow:nth-child(1)", {
-  opacity: 1,
+const introTimeline = gsap.timeline({
+  repeat: -1,
+  repeatDelay: 2,
 });
-scrollTimeline.to(".scroll__arrow:nth-child(1)", {
+introTimeline.to(".text-animated", {
+  text: { value: "Frontend", speed: 0.5 },
+  ease: "linear",
+});
+introTimeline.to(".text-animated", {
+  text: { value: "Backend", speed: 0.5 },
+  ease: "linear",
+  delay: 1,
+});
+introTimeline.to(".text-animated", {
+  text: { value: "Designer", speed: 0.5 },
+  ease: "linear",
+  delay: 1,
+});
+
+const arrowTimeline = gsap.timeline({ repeat: -1, duration: 0.5 });
+arrowTimeline.to(".scroll__arrow:nth-child(1)", {
+  opacity: 0.9,
+});
+arrowTimeline.to(".scroll__arrow:nth-child(1)", {
   opacity: 0,
 });
-scrollTimeline.to(
+arrowTimeline.to(
   ".scroll__arrow:nth-child(2)",
   {
-    opacity: 1,
+    opacity: 0.9,
   },
   "-=0.4"
 );
-scrollTimeline.to(".scroll__arrow:nth-child(2)", {
+arrowTimeline.to(".scroll__arrow:nth-child(2)", {
   opacity: 0,
 });
-scrollTimeline.to(
+arrowTimeline.to(
   ".scroll__arrow:nth-child(3)",
   {
-    opacity: 1,
+    opacity: 0.9,
   },
   "-=0.4"
 );
-scrollTimeline.to(".scroll__arrow:nth-child(3)", {
+arrowTimeline.to(".scroll__arrow:nth-child(3)", {
   opacity: 0,
 });
 
+/**
+ * ----------------------------------------------------------------
+ * -- WebGL Stuff --
+ */
 const canvas = document.querySelector(".canvas");
 
 let scrollY = window.scrollY;
