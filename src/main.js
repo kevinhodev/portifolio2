@@ -51,7 +51,7 @@ introTimeline.to(".text-animated", {
   delay: 1,
 });
 introTimeline.to(".text-animated", {
-  text: { value: "Designer", speed: 0.5 },
+  text: { value: "+ Designer", speed: 0.5 },
   ease: "linear",
   delay: 1,
 });
