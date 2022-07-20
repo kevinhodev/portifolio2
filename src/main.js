@@ -1,7 +1,12 @@
 import * as THREE from "three";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
-import EarthTexture from "./assets/textures/earth.jpg";
+
+import {
+  DiffuseTexture,
+  BumpTexture,
+  SpecularTexture,
+} from "./assets/textures/earth";
 
 gsap.registerPlugin(TextPlugin);
 
@@ -116,12 +121,18 @@ const scene = new THREE.Scene();
 /** Meshes
  *
  */
-const texture = new THREE.TextureLoader().load(EarthTexture);
+const diffuse = new THREE.TextureLoader().load(DiffuseTexture);
+const bump = new THREE.TextureLoader().load(BumpTexture);
+const specular = new THREE.TextureLoader().load(SpecularTexture);
 
 const geometry = new THREE.SphereGeometry(2, 48, 32);
 const material = new THREE.MeshPhongMaterial({
-  map: texture,
-  shininess: 0,
+  map: diffuse,
+  bumpMap: bump,
+  bumpScale: 0.5,
+  specularMap: specular,
+  specular: new THREE.Color("gray"),
+  shininess: 0.2,
 });
 const sphere = new THREE.Mesh(geometry, material);
 sphere.position.z = -18;
@@ -163,9 +174,9 @@ scene.add(particles);
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight("#ffffff");
+const ambientLight = new THREE.AmbientLight("#ffffff", 0.5);
 const directionalLight = new THREE.DirectionalLight("#ffffff", 1);
-directionalLight.position.set(1, 1, 0);
+directionalLight.position.set(-1, 0, 0);
 
 scene.add(directionalLight, ambientLight);
 
