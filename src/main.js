@@ -45,55 +45,53 @@ timeline.from(
 const introTimeline = gsap.timeline({
   repeat: -1,
   repeatDelay: 2,
+  defaults: { ease: "linear" },
 });
-introTimeline.to(".text-animated", {
-  text: { value: "Frontend", speed: 0.5 },
-  ease: "linear",
-});
-introTimeline.to(".text-animated", {
-  text: { value: "Backend", speed: 0.5 },
-  ease: "linear",
-  delay: 1,
-});
-introTimeline.to(".text-animated", {
-  text: { value: "+ Designer", speed: 0.5 },
-  ease: "linear",
-  delay: 1,
-});
+introTimeline
+  .to(".text-animated", {
+    text: { value: "Frontend", speed: 0.5 },
+  })
+  .to(".text-animated", {
+    text: { value: "Backend", speed: 0.5 },
+    delay: 1,
+  })
+  .to(".text-animated", {
+    text: { value: "+ Designer", speed: 0.5 },
+    delay: 1,
+  });
 
-const arrowTimeline = gsap.timeline({ repeat: -1 });
+const arrowTimeline = gsap.timeline({
+  repeat: -1,
+  defaults: { duration: 0.5 },
+});
 arrowTimeline.to(".scroll__arrow:nth-child(1)", {
   opacity: 0.9,
-  duration: 0.5,
 });
-arrowTimeline.to(".scroll__arrow:nth-child(1)", {
-  opacity: 0,
-  duration: 0.5,
-});
-arrowTimeline.to(
-  ".scroll__arrow:nth-child(2)",
-  {
-    opacity: 0.9,
-    duration: 0.5,
-  },
-  "-=0.4"
-);
-arrowTimeline.to(".scroll__arrow:nth-child(2)", {
-  opacity: 0,
-  duration: 0.5,
-});
-arrowTimeline.to(
-  ".scroll__arrow:nth-child(3)",
-  {
-    opacity: 0.9,
-    duration: 0.5,
-  },
-  "-=0.4"
-);
-arrowTimeline.to(".scroll__arrow:nth-child(3)", {
-  opacity: 0,
-  duration: 0.25,
-});
+arrowTimeline
+  .to(".scroll__arrow:nth-child(1)", {
+    opacity: 0,
+  })
+  .to(
+    ".scroll__arrow:nth-child(2)",
+    {
+      opacity: 0.9,
+    },
+    "-=0.4"
+  )
+  .to(".scroll__arrow:nth-child(2)", {
+    opacity: 0,
+  })
+  .to(
+    ".scroll__arrow:nth-child(3)",
+    {
+      opacity: 0.9,
+    },
+    "-=0.4"
+  )
+  .to(".scroll__arrow:nth-child(3)", {
+    opacity: 0,
+    duration: 0.25,
+  });
 
 /**
  * ----------------------------------------------------------------
