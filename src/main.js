@@ -18,7 +18,7 @@ const timeline = gsap.timeline();
 timeline.from(".header__logo", {
   duration: 1,
   opacity: 0,
-  transform: "translateX(-10rem)",
+  x: -100,
 });
 
 timeline.from(
@@ -26,7 +26,7 @@ timeline.from(
   {
     duration: 1,
     opacity: 0,
-    transform: "translateY(-10rem)",
+    y: -100,
     stagger: 0.2,
   },
   "-=1"
@@ -36,7 +36,7 @@ timeline.from(
   {
     duration: 1,
     opacity: 0,
-    transform: "translateX(-10rem)",
+    x: -100,
     stagger: 0.2,
   },
   "-=1"
