@@ -1,43 +1,31 @@
-import * as THREE from "three";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
-
-import {
-  DiffuseTexture,
-  BumpTexture,
-  SpecularTexture,
-} from "./assets/textures/earth";
-
 gsap.registerPlugin(TextPlugin);
+import "./three";
 
-const timeline = gsap.timeline();
+const timeline = gsap.timeline({ defaults: { duration: 1 } });
 
-/* Animations */
-
-//-- Header --//
 timeline.from(".header__logo", {
   duration: 1,
   opacity: 0,
   x: -100,
 });
-
+timeline.to("section", { opacity: 1 }, "-=1");
 timeline.from(
   ".header__menu ul li",
   {
-    duration: 1,
     opacity: 0,
     y: -100,
-    stagger: 0.2,
+    stagger: 0.1,
   },
   "-=1"
 );
 timeline.from(
   ".header__icon",
   {
-    duration: 1,
     opacity: 0,
     x: -100,
-    stagger: 0.2,
+    stagger: 0.1,
   },
   "-=1"
 );
@@ -45,19 +33,18 @@ timeline.from(
 const introTimeline = gsap.timeline({
   repeat: -1,
   repeatDelay: 2,
-  defaults: { ease: "linear" },
+  defaults: { ease: "linear", delay: 1.5 },
 });
 introTimeline
   .to(".text-animated", {
     text: { value: "Frontend", speed: 0.5 },
+    delay: 0,
   })
   .to(".text-animated", {
     text: { value: "Backend", speed: 0.5 },
-    delay: 1,
   })
   .to(".text-animated", {
     text: { value: "+ Designer", speed: 0.5 },
-    delay: 1,
   });
 
 const arrowTimeline = gsap.timeline({
@@ -93,166 +80,62 @@ arrowTimeline
     duration: 0.25,
   });
 
-/**
- * ----------------------------------------------------------------
- * -- WebGL Stuff --
- */
-const canvas = document.querySelector(".canvas");
+let currentSection;
 
-let scrollY = window.scrollY;
-const objectsDistance = 4;
-
-window.addEventListener("scroll", () => (scrollY = window.scrollY));
-
-const cursor = {};
-cursor.x = 0;
-cursor.y = 0;
-
-window.addEventListener("mousemove", (event) => {
-  cursor.x = event.clientX / sizes.width - 0.5;
-  cursor.y = event.clientY / sizes.height - 0.5;
-});
-
-// Scene
-const scene = new THREE.Scene();
-
-/** Meshes
- *
- */
-const diffuse = new THREE.TextureLoader().load(DiffuseTexture);
-const bump = new THREE.TextureLoader().load(BumpTexture);
-const specular = new THREE.TextureLoader().load(SpecularTexture);
-
-const geometry = new THREE.SphereGeometry(2, 48, 32);
-const material = new THREE.MeshPhongMaterial({
-  map: diffuse,
-  bumpMap: bump,
-  bumpScale: 0.5,
-  specularMap: specular,
-  specular: new THREE.Color("gray"),
-  shininess: 0.2,
-});
-const sphere = new THREE.Mesh(geometry, material);
-sphere.position.z = -18;
-sphere.position.x = 6;
-sphere.position.y = 2;
-scene.add(sphere);
-
-/**
- * Particles
- */
-// Geometry
-const particlesCount = 200;
-const positions = new Float32Array(particlesCount * 3);
-
-for (let i = 0; i < particlesCount; i++) {
-  positions[i * 3 + 0] = (Math.random() - 0.5) * 10;
-  positions[i * 3 + 1] =
-    objectsDistance * 0.5 - Math.random() * objectsDistance;
-  positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-}
-
-const particlesGeometry = new THREE.BufferGeometry();
-particlesGeometry.setAttribute(
-  "position",
-  new THREE.BufferAttribute(positions, 3)
-);
-
-// Material
-const particlesMaterial = new THREE.PointsMaterial({
-  color: "#ffeded",
-  sizeAttenuation: true,
-  size: 0.03,
-});
-
-// Points
-const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particles);
-
-/**
- * Lights
- */
-const ambientLight = new THREE.AmbientLight("#ffffff", 0.5);
-const directionalLight = new THREE.DirectionalLight("#ffffff", 1);
-directionalLight.position.set(-1, 0, 0);
-
-scene.add(directionalLight, ambientLight);
-
-/**
- * Sizes
- */
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
+let options = {
+  root: document.querySelector(".wrapper"),
+  rootMargin: "0px 68px 0px 60px",
+  threshold: 1,
+};
+let callback = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      currentSection = entry.target.classList[0];
+    } else {
+      currentSection = null;
+    }
+  });
 };
 
-window.addEventListener("resize", () => {
-  // Update sizes
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
+let firstSectionObserver = new IntersectionObserver(callback, options);
+let lastSectionObserver = new IntersectionObserver(callback, options);
 
-  // Update camera
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
+const sectionWidth = gsap.getProperty("section", "width");
 
-  // Update renderer
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+const sections = [...document.querySelectorAll("section")];
+sections.forEach((section, index) => {
+  if (index === 0) firstSectionObserver.observe(section);
+  if (index === sections.length - 1) lastSectionObserver.observe(section);
+
+  gsap.set(section, {
+    x: `${index * sectionWidth}`,
+  });
 });
 
-// Group
-const cameraGroup = new THREE.Group();
-scene.add(cameraGroup);
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-/**
- * Camera
- */
-// Base camera
-const camera = new THREE.PerspectiveCamera(
-  35,
-  sizes.width / sizes.height,
-  0.1,
-  100
+window.addEventListener(
+  "wheel",
+  (event) => {
+    sections.forEach((section) => {
+      const currentX = gsap.getProperty(section, "x");
+
+      if (currentSection === "intro") {
+        gsap.to(section, {
+          x: currentX - clamp(-event.deltaY, 0, sectionWidth),
+        });
+      } else if (currentSection === "contact") {
+        gsap.to(section, {
+          x: currentX + clamp(event.deltaY, 0, sectionWidth),
+        });
+      } else {
+        gsap.to(section, {
+          x: currentX + event.deltaY,
+        });
+      }
+    });
+  },
+  {
+    passive: true,
+  }
 );
-camera.position.z = 6;
-cameraGroup.add(camera);
-
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-  canvas: canvas,
-  alpha: true,
-});
-renderer.setClearAlpha(0);
-renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-/**
- * Animate
- */
-const clock = new THREE.Clock();
-let previousTime = 0;
-
-const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
-  const deltaTime = elapsedTime - previousTime;
-  previousTime = elapsedTime;
-
-  sphere.rotation.y += deltaTime * 0.6;
-
-  const parallaxX = cursor.x * 0.5;
-  const parallaxY = -cursor.y * 0.5;
-  cameraGroup.position.x +=
-    (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
-  cameraGroup.position.y +=
-    (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
-
-  // Render
-  renderer.render(scene, camera);
-
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
-};
-
-tick();
