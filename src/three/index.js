@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from "gsap";
 import {
   DiffuseTexture,
   BumpTexture,
@@ -6,6 +7,7 @@ import {
 } from "../assets/textures/earth";
 
 const canvas = document.querySelector(".canvas");
+const sectionWidth = gsap.getProperty("section", "width");
 
 let scrollY = 0;
 let scale = 0;
@@ -17,7 +19,7 @@ window.addEventListener(
     event.preventDefault();
     scale += event.deltaY * -0.01;
 
-    scale = Math.min(Math.max(0.125, scale), window.innerWidth);
+    scale = Math.min(Math.max(0.125, scale), sectionWidth / 6);
     scrollY = scale;
   },
   { passive: false }

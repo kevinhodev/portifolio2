@@ -4,7 +4,7 @@
   "description": "Meu portifólio",
   "author": "Kevin Ramos",
   "license": "MIT",
-  "source": "src/index.html",
+  "source": "public/index.html",
   "scripts": {
     "start": "parcel",
     "build": "parcel build"

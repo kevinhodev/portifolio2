@@ -5,12 +5,12 @@ import "./three";
 
 const timeline = gsap.timeline({ defaults: { duration: 1 } });
 
-timeline.from(".header__logo", {
+/*timeline.from(".header__logo", {
   duration: 1,
   opacity: 0,
   x: -100,
 });
-timeline.to("section", { opacity: 1 }, "-=1");
+
 timeline.from(
   ".header__menu ul li",
   {
@@ -28,7 +28,9 @@ timeline.from(
     stagger: 0.1,
   },
   "-=1"
-);
+);*/
+
+timeline.to("section", { opacity: 1 });
 
 const introTimeline = gsap.timeline({
   repeat: -1,
@@ -80,62 +82,100 @@ arrowTimeline
     duration: 0.25,
   });
 
-let currentSection;
+/* Intersection Observer API */
+const createObserver = (callback, granularity) => {
+  let observer;
 
-let options = {
-  root: document.querySelector(".wrapper"),
-  rootMargin: "0px 68px 0px 60px",
-  threshold: 1,
+  const buildThresholdArray = (granularity) => {
+    let thresholds = [];
+
+    for (i = 1; i < granularity; i++) {
+      const ratio = i / granularity;
+      thresholds.push(ratio);
+    }
+
+    thresholds.unshift(0);
+
+    return thresholds;
+  };
+
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: buildThresholdArray(granularity),
+  };
+
+  return (observer = new IntersectionObserver(callback, options));
 };
-let callback = (entries, observer) => {
+/* --------------------------------------------- */
+
+/* -- Sections Stuff -- */
+const sections = [...document.querySelectorAll("section")];
+const firstSection = sections[0].classList[0];
+const lastSection = sections[sections.length - 1].classList[0];
+
+const currentSectionInfo = {
+  name: "intro",
+  intersecting: true,
+  ratio: 1,
+};
+
+const handleSectionIntersection = (entries) => {
   entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      currentSection = entry.target.classList[0];
-    } else {
-      currentSection = null;
+    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+      currentSectionInfo.name = entry.target.classList[0];
+      currentSectionInfo.intersecting = true;
+      currentSectionInfo.ratio = entry.intersectionRatio;
     }
   });
 };
 
-let firstSectionObserver = new IntersectionObserver(callback, options);
-let lastSectionObserver = new IntersectionObserver(callback, options);
+const sectionsObserver = createObserver(handleSectionIntersection, 100);
 
-const sectionWidth = gsap.getProperty("section", "width");
-
-const sections = [...document.querySelectorAll("section")];
 sections.forEach((section, index) => {
-  if (index === 0) firstSectionObserver.observe(section);
-  if (index === sections.length - 1) lastSectionObserver.observe(section);
-
   gsap.set(section, {
-    x: `${index * sectionWidth}`,
+    transform: `translateX(${index * 100}%)`,
   });
+  sectionsObserver.observe(section);
 });
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-window.addEventListener(
-  "wheel",
-  (event) => {
-    sections.forEach((section) => {
-      const currentX = gsap.getProperty(section, "x");
+const handleWheelMove = (event) => {
+  sections.forEach((section) => {
+    const currentX = gsap.getProperty(section, "x");
 
-      if (currentSection === "intro") {
-        gsap.to(section, {
-          x: currentX - clamp(-event.deltaY, 0, sectionWidth),
-        });
-      } else if (currentSection === "contact") {
-        gsap.to(section, {
-          x: currentX + clamp(event.deltaY, 0, sectionWidth),
-        });
-      } else {
-        gsap.to(section, {
-          x: currentX + event.deltaY,
-        });
-      }
+    if (
+      currentSectionInfo.name == firstSection &&
+      currentSectionInfo.ratio >= 0.95
+    ) {
+      gsap.to(section, {
+        x: currentX - clamp(-event.deltaY, 0, window.innerWidth),
+      });
+    } else if (
+      currentSectionInfo.name == lastSection &&
+      currentSectionInfo.ratio >= 0.95
+    ) {
+      gsap.to(section, {
+        x: currentX + clamp(event.deltaY, 0, window.innerWidth),
+      });
+    } else {
+      gsap.to(section, {
+        x: currentX + event.deltaY,
+      });
+    }
+  });
+};
+
+window.addEventListener("wheel", handleWheelMove, {
+  passive: true,
+});
+
+window.addEventListener("resize", () => {
+  sections.forEach((section, index) => {
+    gsap.set(section, {
+      transform: `translateX(${index * 100}%)`,
     });
-  },
-  {
-    passive: true,
-  }
-);
+    sectionsObserver.observe(section);
+  });
+});
