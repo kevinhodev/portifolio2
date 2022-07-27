@@ -176,6 +176,5 @@ window.addEventListener("resize", () => {
     gsap.set(section, {
       transform: `translateX(${index * 100}%)`,
     });
-    sectionsObserver.observe(section);
   });
 });
