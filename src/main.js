@@ -89,7 +89,7 @@ const createObserver = (callback, granularity) => {
   const buildThresholdArray = (granularity) => {
     let thresholds = [];
 
-    for (i = 1; i < granularity; i++) {
+    for (let i = 1; i < granularity; i++) {
       const ratio = i / granularity;
       thresholds.push(ratio);
     }
